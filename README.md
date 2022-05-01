@@ -1,5 +1,5 @@
 # Search-Engine
-Iterates over all IPv4 addresses, subdomain enumerates over hostname, then grabs all urls from each subdomain.
+Iterates over all IPv4 addresses, subdomain enumerates over hostname, then grabs all urls from each subdomain. Multithreading set to 255.
 
 Requires Sublist3r and GAU
 
