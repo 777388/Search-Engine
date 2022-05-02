@@ -1,5 +1,5 @@
 # Search-Engine
-Iterates over all IPv4 addresses, subdomain enumerates over hostname, then grabs all urls from each subdomain and saves each to file. Multithreading set to 255. May want to go through Sublist3r and delete all the error notifications
+Iterates over all IPv4 addresses, grabs the Host, runs them through amass for domain discovery, subdomain enumerates over domains, then grabs all urls from each subdomain and saves each to file. Multithreading set to 255. May want to go through Sublist3r and delete all the error notifications
 
 Requires Amass Sublist3r and GAU
 https://github.com/OWASP/Amass
