@@ -2,6 +2,8 @@ import os
 import socket
 from threading import Thread
 from time import sleep
+import sys
+
 def lookup(addr):
      try:
          return socket.gethostbyaddr(addr)[0]
@@ -14,15 +16,10 @@ def threadhead(arg):
 			for k in range (0, 255, 1):
 				for d in range (0, 255, 1):
 					h = str(str(i)+"."+str(n)+"."+str(k)+"."+str(d))
-					g = str("\r"+h+"\r")
-					f = "curl -s -I "+h+" >> trash"+str(i)+".txt"
-					t = os.system(f)
-					p = "python3 Sublist3r/sublist3r.py -d "+str(lookup(h))+" >> "+str(lookup(h))+".txt"
-					q = "wsl cat "+str(lookup(h))+".txt | gau --threads 5 --o "+str(lookup(h))+".txt"
+					g = str("\r"+h+" \r")
 					if lookup(h) != None: 
-						print(h+str(lookup(h))+"\r\n")
-						o = os.system(p)
-						m = os.system(q)
+						with open('searchengine.txt', 'a') as hi:
+							print(str(lookup(h))+" \r", file=hi)
 					else:
 						print(g, end='', flush=True)
 				
@@ -35,4 +32,13 @@ if __name__ == "__main__":
 		thread.start()
 	for thread in threads:
 		thread.join()
-	print("finished")
+	with open('searchengine.txt')as thing:
+		for line in thing:
+			am = ("amass intel -d "+line.rstrip()+" -whois -o servers.txt")
+			heh = os.system(am)
+	with open('servers.txt') as that:
+		for line in that:
+			p = ("python3 Sublist3r/sublist3r.py -d "+line.rstrip()+" -o "+line.rstrip())
+			o = os.system(p)
+			q = ("wsl cat "+line.rstrip()+"| gau --threads 5 -o "+line.rstrip()+"1.txt")
+			op = os.system(q)
